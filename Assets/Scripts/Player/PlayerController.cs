@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
         WallGrabUI.Instance?.SetClock(isWallGrabbing ? wallGrabTimer / wallGrabDuration : 0, isWallGrabbing);
 
         // ANIMAÇÕES:
-        animator.SetBool("isWalking", Mathf.Abs(moveInput.x) > 0.1f && isGrounded);
+        animator.SetFloat("horizontal", Mathf.Abs(moveInput.x));
         animator.SetBool("isJumping", !isGrounded);
         animator.SetBool("isFalling", rb.linearVelocity.y < -0.1f && !isGrounded);
         animator.SetBool("isWallSliding", isWallGrabbing);
