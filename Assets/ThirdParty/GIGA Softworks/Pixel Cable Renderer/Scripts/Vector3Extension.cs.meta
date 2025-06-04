@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 1c48ad4ad37b5fd4c9a87445668c6d1d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 235811
+  packageName: Soft Pixel Cables LITE
+  packageVersion: 1.1.0
+  assetPath: Assets/GIGA Softworks/Pixel Cable Renderer/Scripts/Vector3Extension.cs
+  uploadId: 722096
