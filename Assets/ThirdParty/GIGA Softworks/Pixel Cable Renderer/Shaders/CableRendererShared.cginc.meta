@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8722fcd8d97b5ca4ab22b27f8c2df18e
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 235811
+  packageName: Soft Pixel Cables LITE
+  packageVersion: 1.1.0
+  assetPath: Assets/GIGA Softworks/Pixel Cable Renderer/Shaders/CableRendererShared.cginc
+  uploadId: 722096

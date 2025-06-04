@@ -1,0 +1,15 @@
+If you want to replace legacy built-in shaders with the new URP shaders:
+
+1) Unzip the content of the URP_Shaders_Source.zip archive
+2) (Optional) Delete the old shaders
+3) Change the shader of the following materials, located in the Materials folder:
+
+
++-------------------------+--------------------------------------------+------------------------------------------------+
+|        Material         |                 Old Shader                 |                   New Shader                   |
++-------------------------+--------------------------------------------+------------------------------------------------+
+| Mat_CableRender 	  | GIGA Softworks/CableRenderer/Cable         | GIGA Softworks/CableRenderer/URP/Cable         |
++-------------------------+--------------------------------------------+------------------------------------------------+
+
+* To change the shader, select the material in the project and choose the shader from the dropdown in the inspector.
+

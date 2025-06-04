@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 866ea9a0af8283348a6442fb0828a912
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 235811
+  packageName: Soft Pixel Cables LITE
+  packageVersion: 1.1.0
+  assetPath: Assets/GIGA Softworks/Pixel Cable Renderer/Scripts/CableRendererPrefabsManager.cs
+  uploadId: 722096

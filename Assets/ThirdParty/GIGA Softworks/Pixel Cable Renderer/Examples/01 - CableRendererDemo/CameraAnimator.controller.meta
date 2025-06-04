@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d579a86935b50f240ae8483ca6d1f126
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 235811
+  packageName: Soft Pixel Cables LITE
+  packageVersion: 1.1.0
+  assetPath: Assets/GIGA Softworks/Pixel Cable Renderer/Examples/01 - CableRendererDemo/CameraAnimator.controller
+  uploadId: 722096

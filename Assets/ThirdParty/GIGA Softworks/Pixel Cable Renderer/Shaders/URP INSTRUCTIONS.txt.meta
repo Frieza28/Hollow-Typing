@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d2a7b586946269647ae20fca7200e149
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 235811
+  packageName: Soft Pixel Cables LITE
+  packageVersion: 1.1.0
+  assetPath: Assets/GIGA Softworks/Pixel Cable Renderer/Shaders/URP INSTRUCTIONS.txt
+  uploadId: 722096
