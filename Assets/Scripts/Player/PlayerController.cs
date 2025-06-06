@@ -29,6 +29,10 @@ public class PlayerController : MonoBehaviour
     // WALLCHECK (Empty colocado do lado do personagem)
     public Transform wallCheck;
     public float wallCheckRadius = 0.2f;
+    private int wallSide = 0; // -1 esquerda, 1 direita
+
+    private bool isOnLadder = false;
+    private float ladderSpeed = 4f;
 
     private void Awake()
     {
@@ -45,15 +49,17 @@ public class PlayerController : MonoBehaviour
     {
         if (context.started && isWallGrabbing)
         {
-            // Salta para fora da parede: impulso contrário à parede e para cima
             isWallGrabbing = false;
             isInWallGrabCooldown = true;
             wallGrabCooldownTimer = wallGrabCooldown;
-    
-            // Deteta para que lado está encostado e aplica impulso contrário
-            float jumpDirection = moveInput.x > 0 ? -1 : 1;
-            rb.linearVelocity = new Vector2(jumpDirection * speed, jumpForce);
-    
+
+            // Impulso para fora da parede
+            float jumpDir = wallSide != 0 ? -wallSide : (lastScale.x > 0 ? -1f : 1f);
+
+            // Impulso lateral forte e ligeiro "nudge" para longe da parede
+            rb.linearVelocity = new Vector2(jumpDir * speed * 1.2f, jumpForce);
+            transform.position += new Vector3(jumpDir * 0.08f, 0, 0);
+
             animator.SetTrigger("JumpTrigger");
             Debug.Log("Saltou da parede!");
         }
@@ -63,7 +69,6 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("JumpTrigger");
         }
     }
-
 
     private void Update()
     {
@@ -76,6 +81,12 @@ public class PlayerController : MonoBehaviour
 
         // Detecta parede (sempre do lado do WallCheck)
         isTouchingWall = Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, wallLayer);
+
+        // WallSide: guarda o último lado encostado
+        if (isTouchingWall)
+        {
+            wallSide = lastScale.x > 0 ? 1 : -1;
+        }
 
         bool holdingDirection = Mathf.Abs(moveInput.x) > 0.1f;
         bool falling = rb.linearVelocity.y < -0.1f;
@@ -127,6 +138,18 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isJumping", !isGrounded);
         animator.SetBool("isFalling", rb.linearVelocity.y < -0.1f && !isGrounded);
         animator.SetBool("isWallSliding", isWallGrabbing);
+
+        // Movimento vertical na escada
+        if (isOnLadder)
+        {
+            float verticalInput = moveInput.y;
+            rb.gravityScale = 0; // Desativa gravidade enquanto está na escada
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, verticalInput * ladderSpeed);
+        }
+        else
+        {
+            rb.gravityScale = 1; // Volta à gravidade normal
+        }
     }
 
     private void FixedUpdate()
@@ -164,4 +187,21 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = false;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ladder"))
+        {
+            isOnLadder = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ladder"))
+        {
+            isOnLadder = false;
+        }
+    }
+
 }
