@@ -1,5 +1,15 @@
 # 🕹️ Hollow-Typing
 
+![Unity Version](https://img.shields.io/badge/unity-6000.0.46f1-blue.svg)
+![License](https://img.shields.io/badge/license-Custom--Academic-lightgrey.svg)
+![Last Commit](https://img.shields.io/github/last-commit/Frieza28/Hollow-Typing)
+![Made with Unity](https://img.shields.io/badge/Made%20with-Unity-000?logo=unity&logoColor=white)
+
+![Platform](https://img.shields.io/badge/platform-PC%20%7C%20WebGL%20(planned)-green)
+![Windows](https://img.shields.io/badge/Windows-Supported-blue?logo=windows)
+![macOS](https://img.shields.io/badge/macOS-Supported-black?logo=apple)
+![Linux](https://img.shields.io/badge/Linux-Supported-yellow?logo=linux)
+
 **Celeste meets Epistory** in this fast-paced 2D platformer with a twist: *you type to survive*.
 
 In **Hollow Typing**, players must type words quickly and precisely to:
