@@ -53,6 +53,8 @@ public class RuneTypingPoint : MonoBehaviour
             platformToRotate.transform.position = initialPosition;
             platformToRotate.transform.eulerAngles = initialRotation;
         }
-        // Podes meter lógica para "perder vida/voltar ao início do nível" aqui.
+        // **Tira uma vida**
+        PlayerStats.Instance.TakeDamage(1);
+        // Podes meter lógica para "voltar ao início do nível" aqui.
     }
 }
