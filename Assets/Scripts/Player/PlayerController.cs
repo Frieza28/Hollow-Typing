@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isOnLadder = false;
     private float ladderSpeed = 4f;
+    public Transform startPoint; // arrasta aqui o StartPoint no inspector
 
     private void Awake()
     {
@@ -149,6 +150,20 @@ public class PlayerController : MonoBehaviour
         else
         {
             rb.gravityScale = 1; // Volta à gravidade normal
+        }
+
+        // --- CHECK FALL/RESPAWN ---
+        if (transform.position.y <= -5f)
+        {
+            // Perde 1 vida
+            PlayerStats.Instance.TakeDamage(1);
+    
+            // Teleporta para o start point
+            transform.position = startPoint.position;
+    
+            // Zera velocidade se quiseres
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0;
         }
     }
 
