@@ -3002,6 +3002,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PF Village Props - Jump Platform 01
       objectReference: {fileID: 0}
+    - target: {fileID: 5373330553216305747, guid: 65321bf0311c2eb48be353666f829ca1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
