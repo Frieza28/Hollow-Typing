@@ -4,36 +4,63 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 6f;
-    public float jumpForce = 7f;
-    private Rigidbody2D rb;
-    private Vector2 moveInput;
-    private bool isJumping = false;
-    private bool isGrounded = false;
-    private Animator animator;
-    private Vector3 lastScale = new Vector3(5, 5, 5);
+    [Header("Movement Properties")]
+    [Space]
+    [Tooltip("Player Movement Speed")]
+    [Range(1f, 10f)]
+    [SerializeField]
+    private float speed = 6f;
+    [Tooltip("Player Jump Force")]
+    [Range(1f, 20f)]
+    [SerializeField]
+    private float jumpForce = 7f;
 
-    // WALL SLIDE/GRAB
-    public LayerMask wallLayer;
-    public float wallCheckDistance = 0.2f;
-    public float wallGrabDuration = 5f;
+    // TODO: Refactor wall grab settings into a separate class or scriptable object for better organization and reusability.
+    [Header("Wall Grab Settings")]
+    [Space]
+    [Tooltip("Layer mask for walls that can be grabbed")]
+    [SerializeField]
+    private LayerMask wallLayer;
+    [Tooltip("Distance to check for walls when grabbing")]
+    [Range(0.1f, 1f)]
+    [SerializeField]
+    private float wallCheckDistance = 0.2f;
+    [Tooltip("Duration of wall grab before cooldown starts")]
+    [Range(1f, 10f)]
+    [SerializeField]
+    private float wallGrabDuration = 5f;
+    [Tooltip("Cooldown time after releasing wall grab")]
+    [Range(1f, 10f)]
+    [SerializeField]
+    private float wallGrabCooldown = 5f;
+    [Space(10)]
+    [Tooltip("Transform to check for walls")]
+    [SerializeField]
+    private Transform wallCheck;
+    [Tooltip("Radius for wall detection")]
+    [Range(0.1f, 1f)]
+    [SerializeField]
+    private float wallCheckRadius = 0.2f;
+
+    private float wallGrabCooldownTimer = 0f;
+    private bool isInWallGrabCooldown = false;
     private float wallGrabTimer;
     private bool isTouchingWall = false;
     private bool isWallGrabbing = false;
-
-    // COOLDOWN
-    private float wallGrabCooldown = 5f;
-    private float wallGrabCooldownTimer = 0f;
-    private bool isInWallGrabCooldown = false;
-
-    // WALLCHECK (Empty colocado do lado do personagem)
-    public Transform wallCheck;
-    public float wallCheckRadius = 0.2f;
-    private int wallSide = 0; // -1 esquerda, 1 direita
+    private int wallSide = 0; // -1 left, 1 right
 
     private bool isOnLadder = false;
+    // TODO: Not using atm
     private float ladderSpeed = 4f;
     public Transform startPoint; // arrasta aqui o StartPoint no inspector
+
+    // State variables
+    private Vector2 moveInput;
+    private bool isJumping = false;
+    private bool isGrounded = false;
+    private Vector3 lastScale = new(5, 5, 5);
+    private Rigidbody2D rb;
+    private Animator animator;
 
     private void Awake()
     {
@@ -61,13 +88,13 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = new Vector2(jumpDir * speed * 1.2f, jumpForce);
             transform.position += new Vector3(jumpDir * 0.08f, 0, 0);
 
-            animator.SetTrigger("JumpTrigger");
+            animator.SetTrigger("jump");
             Debug.Log("Saltou da parede!");
         }
         else if (context.started && isGrounded)
         {
             isJumping = true;
-            animator.SetTrigger("JumpTrigger");
+            animator.SetTrigger("jump");
         }
     }
 
@@ -136,10 +163,9 @@ public class PlayerController : MonoBehaviour
 
         // ANIMAÇÕES:
         animator.SetFloat("horizontal", Mathf.Abs(moveInput.x));
-        animator.SetBool("isJumping", !isGrounded);
-        animator.SetBool("isFalling", rb.linearVelocity.y < -0.1f && !isGrounded);
         animator.SetBool("isWallSliding", isWallGrabbing);
 
+        // TODO: Use Kinematic Rigidbody2D instead?
         // Movimento vertical na escada
         if (isOnLadder)
         {
