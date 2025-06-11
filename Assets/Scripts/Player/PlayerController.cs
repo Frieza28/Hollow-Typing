@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -61,11 +62,13 @@ public class PlayerController : MonoBehaviour
     private Vector3 lastScale = new(5, 5, 5);
     private Rigidbody2D rb;
     private Animator animator;
+    private GroundSensor groundSensor;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        groundSensor = GetComponentInChildren<GroundSensor>();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -91,7 +94,7 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("jump");
             Debug.Log("Saltou da parede!");
         }
-        else if (context.started && isGrounded)
+        else if (context.started && groundSensor.CanJump())
         {
             isJumping = true;
             animator.SetTrigger("jump");
@@ -100,6 +103,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        // TODO: Refactor animator parameters into a separate class or scriptable object for better organization and reusability.
         // Flip sprite
         if (moveInput.x > 0.1f)
             lastScale = new Vector3(5, 5, 5);
@@ -162,7 +166,10 @@ public class PlayerController : MonoBehaviour
         WallGrabUI.Instance?.SetClock(isWallGrabbing ? wallGrabTimer / wallGrabDuration : 0, isWallGrabbing);
 
         // ANIMAÇÕES:
+        // TODO: Refactor animator parameters into a separate class or scriptable object for better organization and reusability.
         animator.SetFloat("horizontal", Mathf.Abs(moveInput.x));
+        animator.SetFloat("vertical", rb.linearVelocity.y);
+        animator.SetBool("isGrounded", groundSensor.IsGrounded);
         animator.SetBool("isWallSliding", isWallGrabbing);
 
         // TODO: Use Kinematic Rigidbody2D instead?
