@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 227428663652426}
   - component: {fileID: 3489358534681571454}
   - component: {fileID: 1719348789717524236}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -917,7 +917,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4168782258671797530}
   - component: {fileID: 4589812196247568325}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LARGE ISLAND
   m_TagString: Untagged
   m_Icon: {fileID: 0}

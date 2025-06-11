@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6470535561677256842}
   - component: {fileID: 1466415052336983052}
-  m_Layer: 0
+  - component: {fileID: 2144351336040439865}
+  m_Layer: 7
   m_Name: TILTED ISLAND 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,6 +46,58 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!60 &2144351336040439865
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4681787372443103479}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 35.64897, y: 1.7586007}
+      - {x: 28.959179, y: 3.7989128}
+      - {x: 28.775043, y: 2.9884877}
+      - {x: 31.781555, y: 1.9034846}
+      - {x: 35.404736, y: 0.79146355}
+  m_UseDelaunayMesh: 0
 --- !u!1 &8770491669546067552
 GameObject:
   m_ObjectHideFlags: 0
