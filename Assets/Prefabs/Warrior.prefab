@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1605639976622578609
+--- !u!1 &2175840246033157162
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4886785672408193765}
+  - component: {fileID: 3883646658419929350}
   m_Layer: 0
   m_Name: WallCheckL
   m_TagString: Untagged
@@ -16,13 +16,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4886785672408193765
+--- !u!4 &3883646658419929350
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1605639976622578609}
+  m_GameObject: {fileID: 2175840246033157162}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.177, y: -0.063, z: -1}
@@ -31,7 +31,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8184833794025703420}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6110966649704367665
+--- !u!1 &5602737805763380982
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -39,8 +39,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3221875908078279824}
-  - component: {fileID: 6801360720042957036}
+  - component: {fileID: 1507335565121077210}
+  m_Layer: 0
+  m_Name: WallCheckR
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1507335565121077210
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5602737805763380982}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.041, y: -0.041, z: -1.91629}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8184833794025703420}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7991562405736533971
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3032348642428611325}
+  - component: {fileID: 4852289496676340055}
   m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
@@ -48,28 +79,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3221875908078279824
+--- !u!4 &3032348642428611325
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6110966649704367665}
+  m_GameObject: {fileID: 7991562405736533971}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.082, y: -0.21, z: 0}
+  m_LocalPosition: {x: -0.0763, y: -0.2087, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8184833794025703420}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6801360720042957036
+--- !u!114 &4852289496676340055
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6110966649704367665}
+  m_GameObject: {fileID: 7991562405736533971}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d63cb8e9adee3348938027a91621698, type: 3}
@@ -79,37 +110,6 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 128
---- !u!1 &8158240327669892217
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6756707352416836449}
-  m_Layer: 0
-  m_Name: WallCheckR
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6756707352416836449
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8158240327669892217}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.041, y: -0.041, z: -1.91629}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8184833794025703420}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8782421681197698638
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,10 +120,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8184833794025703420}
   - component: {fileID: 324200199133789346}
-  - component: {fileID: 33405061569915733}
   - component: {fileID: 5393063764835467371}
   - component: {fileID: 6009650868878735229}
   - component: {fileID: 5571538052494078624}
+  - component: {fileID: 33405061569915733}
   - component: {fileID: 2395457835240433792}
   - component: {fileID: 5164272424754939279}
   m_Layer: 0
@@ -146,9 +146,9 @@ Transform:
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6756707352416836449}
-  - {fileID: 4886785672408193765}
-  - {fileID: 3221875908078279824}
+  - {fileID: 1507335565121077210}
+  - {fileID: 3883646658419929350}
+  - {fileID: 3032348642428611325}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &324200199133789346
@@ -173,28 +173,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &33405061569915733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8782421681197698638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 041626005cebaf24f8175fe8f34caf00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 6
-  jumpForce: 8
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  wallCheckDistance: 0.2
-  wallGrabDuration: 5
-  wallGrabCooldown: 5
-  wallCheck: {fileID: 6756707352416836449}
-  wallCheckRadius: 0.2
 --- !u!212 &5393063764835467371
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -426,8 +404,10 @@ MonoBehaviour:
     m_Bits: 8
   wallCheckDistance: 0.2
   wallGrabDuration: 5
+  wallGrabCooldown: 5
   wallCheck: {fileID: 1507335565121077210}
   wallCheckRadius: 0.2
+  startPoint: {fileID: 0}
 --- !u!61 &2395457835240433792
 BoxCollider2D:
   m_ObjectHideFlags: 0
