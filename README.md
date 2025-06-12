@@ -10,7 +10,7 @@
 ![macOS](https://img.shields.io/badge/macOS-Supported-black?logo=apple)
 ![Linux](https://img.shields.io/badge/Linux-Supported-yellow?logo=linux)
 
-![Unity CI](https://github.com/Frieza28/Hollow-Typing/actions/workflows/unity-ci.yml/badge.svg)
+![Unity CI](https://github.com/Frieza28/Hollow-Typing/actions/workflows/main.yaml/badge.svg)
 ![Issue Tracker](https://img.shields.io/github/issues/Frieza28/Hollow-Typing)
 
 **Celeste meets Epistory** in this fast-paced 2D platformer with a twist: *you type to survive*.
