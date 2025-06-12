@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     private bool isOnLadder = false;
     // TODO: Not using atm
     private float ladderSpeed = 4f;
-    public Transform startPoint; // arrasta aqui o StartPoint no inspector
+    public Transform startPoint; // TODO:?  arrasta aqui o StartPoint no inspector
 
     // State variables
     private Vector2 moveInput;
@@ -63,6 +63,27 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private GroundSensor groundSensor;
+
+    public void TakeDamage(int dmg)
+    {
+        // TODO: subtract health
+        // TODO: move to animate class
+        animator.SetTrigger("hurt");
+
+        //if (health <= 0)
+        //{
+        //      Die();
+        //    anim.PlayDie();
+        //    // Disable input, collider, etc.
+        //}
+    }
+
+    private void Die()
+    {
+        // TODO: Implement death logic, like respawning or game over
+        // TODO: move to animate class
+        animator.SetTrigger("die");
+    }
 
     private void Awake()
     {
@@ -190,10 +211,10 @@ public class PlayerController : MonoBehaviour
         {
             // Perde 1 vida
             PlayerStats.Instance.TakeDamage(1);
-    
+
             // Teleporta para o start point
             transform.position = startPoint.position;
-    
+
             // Zera velocidade se quiseres
             rb.linearVelocity = Vector2.zero;
             rb.angularVelocity = 0;
