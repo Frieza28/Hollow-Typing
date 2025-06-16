@@ -2,31 +2,33 @@ using UnityEngine;
 
 public class RuneTypingKillEnemy : RuneTypingPoint
 {
-    public GameObject enemyToControl; // Inimigo a controlar
-
+    public GameObject enemyToKill;
     private EnemyAI enemyAI;
+    private bool chaseActivated = false;
 
     protected override void Start()
     {
         base.Start();
-        if (enemyToControl != null)
-            enemyAI = enemyToControl.GetComponent<EnemyAI>(); // Usa o nome do script do teu inimigo!
+        if (enemyToKill != null)
+            enemyAI = enemyToKill.GetComponent<EnemyAI>();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void Update()
     {
-        if (other.CompareTag("Player") && enemyAI != null)
+        // Só ativa quando o Typing UI estiver ativo, só uma vez!
+        if (!chaseActivated && typingUI != null && typingUI.isActiveAndEnabled)
         {
-            enemyAI.ActivateChase(); // O inimigo começa a perseguir o jogador
+            if (enemyAI != null)
+                enemyAI.ActivateChase();
+            chaseActivated = true;
         }
     }
 
     protected override void OnTypingSuccess()
     {
-        if (enemyToControl != null)
+        if (enemyToKill != null)
         {
-            // Se tiveres método de morte, chama-o. Senão, usa Destroy:
-            Destroy(enemyToControl);
+            Destroy(enemyToKill);
         }
         base.OnTypingSuccess();
     }
