@@ -3,6 +3,7 @@
  */
 
 using UnityEngine;
+using System.Collections;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class PlayerStats : MonoBehaviour
     public float Health { get { return health; } }
     public float MaxHealth { get { return maxHealth; } }
     public float MaxTotalHealth { get { return maxTotalHealth; } }
+    public GameObject gameOverPanel;
 
     public void Heal(float health)
     {
@@ -76,9 +78,22 @@ public class PlayerStats : MonoBehaviour
 
     private void GameOver()
     {
-        // Aqui podes mostrar um painel, reiniciar a cena, etc.
-        Debug.Log("GAME OVER!");
-        // Exemplo: UnityEngine.SceneManagement.SceneManager.LoadScene("Level1");
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(true);
+
+        Time.timeScale = 0f;
+
+        StartCoroutine(WaitAndEnd());
+    }
+
+    private IEnumerator WaitAndEnd()
+    {
+        yield return new WaitForSecondsRealtime(2.5f); 
+    #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+    #else
+        Application.Quit();
+    #endif
     }
 
 }

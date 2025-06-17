@@ -12,10 +12,14 @@ public abstract class RuneTypingPoint : MonoBehaviour
     // Subclasses podem precisar de Start para setar estado inicial
     protected virtual void Start() { }
 
+    // Na classe base
+    protected virtual void OnTypingStart() { }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!completed && other.CompareTag("Player"))
         {
+            OnTypingStart();
             typingUI.StartTyping(wordsToType, timeLimit, OnTypingSuccess, OnTypingFail);
         }
     }
