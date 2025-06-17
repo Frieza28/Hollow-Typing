@@ -4,44 +4,79 @@ public class EnemyAI : MonoBehaviour
 {
     public Transform player;
     public float speed = 2.5f;
+    public float chaseDistance = 7f;
+    public float attackDistance = 1.2f; // Distância para atacar
     public bool isChasing = false;
-    public float chaseDistance = 7f; // Distância máxima para perseguir
+
+    private Animator animator;
+    private bool isAttacking = false;
+    private bool isDead = false;
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+        isChasing = false;
+    }
 
     void Update()
     {
+        if (isDead) return;
+
         if (isChasing && player != null)
         {
             float distance = Vector2.Distance(player.position, transform.position);
 
-            if (distance <= chaseDistance)
+            if (distance <= attackDistance)
             {
-                Vector2 direction = (player.position - transform.position).normalized;
-                transform.position += (Vector3)direction * speed * Time.deltaTime;
+                if (!isAttacking)
+                {
+                    isAttacking = true;
+                    if (animator != null) animator.SetTrigger("Attack");
+                    // Dano no player
+                    PlayerStats ps = player.GetComponent<PlayerStats>();
+                    if (ps != null) ps.TakeDamage(1);
+                    // Opcional: cooldown de ataque ou travar movimento
+                    Invoke(nameof(ResetAttack), 1f); // 1 segundo entre ataques (ajusta ao tempo da animação)
+                }
+                // Não avança enquanto ataca
+                if (animator != null) animator.SetBool("isMoving", false);
             }
-            // Se quiseres que o inimigo pare de perseguir se o player fugir, podes usar:
-            // else { isChasing = false; }
+            else
+            {
+                // Só persegue se não estiver a atacar
+                if (!isAttacking)
+                {
+                    if (animator != null) animator.SetBool("isMoving", true);
+                    Vector2 direction = (player.position - transform.position).normalized;
+                    transform.position += (Vector3)direction * speed * Time.deltaTime;
+                }
+            }
         }
+        else
+        {
+            if (animator != null) animator.SetBool("isMoving", false);
+        }
+    }
+
+    private void ResetAttack()
+    {
+        isAttacking = false;
     }
 
     public void ActivateChase()
     {
+        Debug.Log($"{name} -- ActivateChase chamado! Frame: {Time.frameCount}");
         isChasing = true;
     }
 
-    // Detetar colisão com o player
-    private void OnTriggerEnter2D(Collider2D other)
+
+    public void Die()
     {
-        if (isChasing && other.CompareTag("Player"))
-        {
-            // Perde uma vida e volta ao start point
-            PlayerStats ps = other.GetComponent<PlayerStats>();
-            if (ps != null) ps.TakeDamage(1);
-
-            // Repor posição do jogador (assumindo que tens GameManager)
-            GameManager.Instance.player.transform.position = GameManager.Instance.respawnPoint.position;
-
-            // (Opcional) parar perseguição depois do ataque
-            // isChasing = false;
-        }
+        if (isDead) return;
+        isDead = true;
+        isChasing = false;
+        if (animator != null) animator.SetTrigger("Death");
+        // Destrói o inimigo após a animação de morte (ajusta ao tempo real da tua animação Death)
+        Destroy(gameObject, 2.8f); // 1.2 segundos, muda se necessário
     }
 }

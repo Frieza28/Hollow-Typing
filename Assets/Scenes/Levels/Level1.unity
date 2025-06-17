@@ -291,6 +291,11 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 3.8838844, y: 2.7918572}
   m_EdgeRadius: 0
+--- !u!1 &204121604 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6654034005283600635, guid: 36723777813e282429df3a6e9e98edca, type: 3}
+  m_PrefabInstance: {fileID: 1779960809593525420}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &227997381 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 999112177512332789, guid: f7e7dd82dcce67148b71dccf873a114a, type: 3}
@@ -8112,6 +8117,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas - HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 8967124972597390094, guid: 36723777813e282429df3a6e9e98edca, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9254,6 +9263,10 @@ PrefabInstance:
       propertyPath: wallLayer.m_Bits
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5164272424754939279, guid: 98ea19339ee0f7449833e4daf9f6b3c6, type: 3}
+      propertyPath: gameOverPanel
+      value: 
+      objectReference: {fileID: 204121604}
     - target: {fileID: 5571538052494078624, guid: 98ea19339ee0f7449833e4daf9f6b3c6, type: 3}
       propertyPath: m_Constraints
       value: 4

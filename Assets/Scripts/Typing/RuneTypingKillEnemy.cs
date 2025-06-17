@@ -15,21 +15,33 @@ public class RuneTypingKillEnemy : RuneTypingPoint
 
     void Update()
     {
-        // Só ativa quando o Typing UI estiver ativo, só uma vez!
-        if (!chaseActivated && typingUI != null && typingUI.isActiveAndEnabled)
+    }
+
+    protected override void OnTypingStart()
+    {
+        if (!chaseActivated && enemyAI != null)
         {
-            if (enemyAI != null)
-                enemyAI.ActivateChase();
+            enemyAI.ActivateChase();
             chaseActivated = true;
         }
     }
+
 
     protected override void OnTypingSuccess()
     {
         if (enemyToKill != null)
         {
-            Destroy(enemyToKill);
+            var enemyAI = enemyToKill.GetComponent<EnemyAI>();
+            if (enemyAI != null)
+            {
+                enemyAI.Die(); // Chama a animação de morte e destroi depois
+            }
+            else
+            {
+                Destroy(enemyToKill); // fallback
+            }
         }
         base.OnTypingSuccess();
     }
+
 }
