@@ -207,7 +207,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // --- CHECK FALL/RESPAWN ---
-        if (transform.position.y <= -10f)
+        if (transform.position.y <= -20f)
         {
             // Perde 1 vida
             PlayerStats.Instance.TakeDamage(1);
