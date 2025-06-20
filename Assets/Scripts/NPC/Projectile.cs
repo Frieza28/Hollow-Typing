@@ -38,7 +38,7 @@ public class Projectile : MonoBehaviour
                 animator.SetTrigger("Death");
             Destroy(gameObject, 0.6f);
         }
-        else if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Block"))
         {
             exploded = true;
             var rb = GetComponent<Rigidbody2D>();

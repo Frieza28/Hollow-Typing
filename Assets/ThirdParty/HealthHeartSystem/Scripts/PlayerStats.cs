@@ -96,4 +96,12 @@ public class PlayerStats : MonoBehaviour
     #endif
     }
 
+    public void Heal(int amount)
+    {
+        health = Mathf.Min(health + amount, maxHealth); // Garante que não passa do máximo
+        if (onHealthChangedCallback != null)
+            onHealthChangedCallback.Invoke();
+    }
+
+
 }
