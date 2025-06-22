@@ -4,7 +4,7 @@ using TMPro;
 
 public class LevelTimer : MonoBehaviour
 {
-    public float totalTime = 60f; // tempo total do nível (segundos)
+    public float totalTime = 60f; 
     private float timeRemaining;
     public PlayerStats playerStats;
 
@@ -26,7 +26,7 @@ public class LevelTimer : MonoBehaviour
         if (timeRemaining > 0)
         {
             timeRemaining -= Time.deltaTime;
-            if (timeRemaining < 0) timeRemaining = 0; // nunca deixa ir negativo
+            if (timeRemaining < 0) timeRemaining = 0; 
             UpdateTimerDisplay();
         }
         else
@@ -56,13 +56,12 @@ public class LevelTimer : MonoBehaviour
         endMessage.text = "FIM DO TEMPO";
         endMessage.gameObject.SetActive(true);
     
-        // Espera 5 segundos antes de sair
         StartCoroutine(WaitAndQuit());
     }
     
     private System.Collections.IEnumerator WaitAndQuit()
     {
-        yield return new WaitForSecondsRealtime(5f); // Importante usar Realtime!
+        yield return new WaitForSecondsRealtime(5f);
     
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;

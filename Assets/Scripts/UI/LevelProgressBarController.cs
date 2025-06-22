@@ -30,7 +30,6 @@ public class LevelProgressBarController : MonoBehaviour
         float progress = Mathf.InverseLerp(startX, endX, playerX);
         progress = Mathf.Clamp01(progress);
 
-        // Interpola entre a posição do barLeft e barRight (em UI)
         Vector2 iconPos = Vector2.Lerp(barLeftPos, barRightPos, progress);
         playerIcon.anchoredPosition = new Vector2(iconPos.x, playerIcon.anchoredPosition.y);
 

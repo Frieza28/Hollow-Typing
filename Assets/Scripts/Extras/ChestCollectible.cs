@@ -10,7 +10,6 @@ public class ChestCollectible : MonoBehaviour
 
     private void Start()
     {
-        // Começa invisível
         if (chestIconImage != null)
         {
             Color c = chestIconImage.color;
@@ -25,13 +24,13 @@ public class ChestCollectible : MonoBehaviour
         {
             if (chestIconHUD != null && chestIconImage != null)
             {
-                chestIconHUD.SetActive(true); // Mostra o ícone no HUD
+                chestIconHUD.SetActive(true); 
                 Color c = chestIconImage.color;
-                c.a = 1f;   // 1f = 255 (totalmente opaco)
+                c.a = 1f;   
                 chestIconImage.color = c;
             }
 
-            Destroy(gameObject); // Remove o baú do mapa
+            Destroy(gameObject); 
         }
     }
 

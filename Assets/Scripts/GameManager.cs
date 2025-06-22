@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections; // Necessário para Coroutines
+using System.Collections; 
 
 public class GameManager : MonoBehaviour
 {
@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
         lives--;
         if (lives <= 0)
         {
-            // Chama fim de jogo com delay
             EndGameAfterDelay(5f);
         }
         else
@@ -34,16 +33,16 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator EndGameCoroutine(float delaySeconds)
     {
-        yield return new WaitForSecondsRealtime(delaySeconds); // Usar Realtime para funcionar com Time.timeScale = 0
+        yield return new WaitForSecondsRealtime(delaySeconds); 
         EndScene();
     }
 
     void EndScene()
     {
 #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false; // Encerra o play mode no Editor
+        UnityEditor.EditorApplication.isPlaying = false; 
 #else
-        Application.Quit(); // Encerra o jogo em build real
+        Application.Quit(); 
 #endif
     }
 }

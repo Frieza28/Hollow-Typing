@@ -18,5 +18,4 @@ public class RuneTypingReveal : RuneTypingPoint
         base.OnTypingSuccess();
     }
 
-    // (Opcional) Podes implementar OnTypingFail para castigar ou ignorar falha
 }
