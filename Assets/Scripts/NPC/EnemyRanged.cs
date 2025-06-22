@@ -3,10 +3,10 @@ using UnityEngine;
 public class EnemyRanged : MonoBehaviour
 {
     public Transform player;
-    public GameObject projectilePrefab;   // Prefab do projétil (com Rigidbody2D)
-    public Transform firePoint;           // Onde o projétil nasce
+    public GameObject projectilePrefab;  
+    public Transform firePoint;           
     public float attackDistance = 8f;
-    public float fireRate = 1.5f;         // Segundos entre tiros
+    public float fireRate = 1.5f;         
     public float projectileSpeed = 8f;
 
     private float fireCooldown = 0f;
@@ -26,13 +26,11 @@ public class EnemyRanged : MonoBehaviour
 
         if (distance <= attackDistance)
         {
-            // Olha para o player (flip horizontal)
             if (player.position.x < transform.position.x)
                 transform.localScale = new Vector3(-3, 3, 3);
             else
                 transform.localScale = new Vector3(3, 3, 3);
 
-            // Ataca se cooldown terminou
             fireCooldown -= Time.deltaTime;
             if (fireCooldown <= 0f)
             {
@@ -40,37 +38,35 @@ public class EnemyRanged : MonoBehaviour
                 fireCooldown = fireRate;
             }
         }
-        // Não precisas de SetBool("isAttacking", false), pois não existe esse parâmetro!
     }
 
     void Attack()
     {
         if (animator != null)
-            animator.SetTrigger("Attack"); // Usa o nome exato do trigger da tua animação de disparo ("Attack" no teu Animator)
+            animator.SetTrigger("Attack"); 
 
         if (projectilePrefab != null && firePoint != null && player != null)
         {
             Vector3 firePos = firePoint.position;
-            firePos.z = 0; // Força o Z=0 para garantir que aparece
+            firePos.z = 0; 
 
             GameObject projectile = Instantiate(projectilePrefab, firePos, Quaternion.identity);
             Vector2 dir = (player.position - firePoint.position).normalized;
 
-            // ----------- FLIP X (recomendado para sprites 2D) -----------
             float originalY = projectile.transform.localScale.y;
             float originalZ = projectile.transform.localScale.z;
-            float originalX = Mathf.Abs(projectile.transform.localScale.x); // valor positivo original
+            float originalX = Mathf.Abs(projectile.transform.localScale.x); 
 
             if (dir.x < 0)
-                projectile.transform.localScale = new Vector3(-originalX, originalY, originalZ); // esquerda
+                projectile.transform.localScale = new Vector3(-originalX, originalY, originalZ); 
             else
-                projectile.transform.localScale = new Vector3(originalX, originalY, originalZ);  // direita
+                projectile.transform.localScale = new Vector3(originalX, originalY, originalZ); 
 
             // ------------------------------------------------------------
 
             Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
             if (rb != null)
-                rb.linearVelocity = dir * projectileSpeed; // ajusta a velocidade se quiseres
+                rb.linearVelocity = dir * projectileSpeed; 
         }
     }
 

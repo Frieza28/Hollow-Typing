@@ -128,9 +128,8 @@ MonoBehaviour:
   dialogPanel: {fileID: 0}
   dialogText: {fileID: 0}
   messages:
-  - "Tas todo cego irm\xE3o, muito bixo nessas ilhas voadoras tipo isto daquinada
-    \xE9 uma vers\xE3o ligeiramente melhor dos skylanders.\n\nActivision contrata-nos!\n(clica
-    E)"
+  - Demons have appeared and are causing trouble on the islands. Use the runes to
+    change the paths and move forward.
   interactHint: {fileID: 7774712826209746853}
 --- !u!61 &1140412036304728379
 BoxCollider2D:

@@ -63,6 +63,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private GroundSensor groundSensor;
+    private int jumpCount = 0;
+    public int maxJumps = 2;  
+
 
     public void TakeDamage(int dmg)
     {
@@ -115,10 +118,11 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("jump");
             Debug.Log("Saltou da parede!");
         }
-        else if (context.started && groundSensor.CanJump())
+        else if (context.started && jumpCount < maxJumps)
         {
             isJumping = true;
             animator.SetTrigger("jump");
+            jumpCount++; 
         }
     }
 
@@ -140,6 +144,9 @@ public class PlayerController : MonoBehaviour
         {
             wallSide = lastScale.x > 0 ? 1 : -1;
         }
+
+        if (groundSensor.IsGrounded)
+            jumpCount = 0; 
 
         bool holdingDirection = Mathf.Abs(moveInput.x) > 0.1f;
         bool falling = rb.linearVelocity.y < -0.1f;

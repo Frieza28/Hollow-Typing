@@ -6,6 +6,7 @@ TagManager:
   tags:
   - platform
   - Enemy
+  - MenuMusic
   layers:
   - Default
   - TransparentFX

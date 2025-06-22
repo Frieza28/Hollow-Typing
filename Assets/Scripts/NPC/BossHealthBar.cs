@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class BossHealthBar : MonoBehaviour
 {
-    public Image fillImage; // arrasta aqui o BossHealthBarFill
+    public Image fillImage; 
     private float maxHealth;
     
     public void SetMaxHealth(float value)

@@ -8,12 +8,11 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        // Força Z=0 sempre que nasce
         Vector3 pos = transform.position;
         pos.z = -5;
         transform.position = pos;
 
-        Destroy(gameObject, 10f); // tempo máximo de vida
+        Destroy(gameObject, 10f); 
     }
 
 
@@ -23,13 +22,11 @@ public class Projectile : MonoBehaviour
     
         if (other.CompareTag("Player"))
         {
-            // Tira 1 coração/vida ao jogador
             PlayerStats ps = other.GetComponent<PlayerStats>();
             if (ps != null)
-                ps.TakeDamage(1); // ou o método que usas para perder vida
+                ps.TakeDamage(1); 
     
             exploded = true;
-            // Parar movimento e colisão, animar explosão, destruir, etc.
             var rb = GetComponent<Rigidbody2D>();
             if (rb != null) rb.linearVelocity = Vector2.zero;
             var collider = GetComponent<Collider2D>();
