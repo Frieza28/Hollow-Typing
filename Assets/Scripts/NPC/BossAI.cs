@@ -7,11 +7,11 @@ public class BossAI : MonoBehaviour
     public Transform player;
     public GameObject projectilePrefab;
     public Transform firePoint;
-    public float attackDistance = 25f;    // Campo de visão do boss
-    public float fireRate = 0.35f;        // Intervalo entre tiros (quanto menor, mais frenético)
+    public float attackDistance = 25f;    
+    public float fireRate = 0.35f;        
     public float projectileSpeed = 12f;
-    public float moveSpeed = 6f;          // Velocidade de perseguição
-    public float followHeight = 3f;       // O quanto acima/below do player ele tenta ficar
+    public float moveSpeed = 6f;          
+    public float followHeight = 3f;       
 
     private float fireCooldown = 0f;
     private Rigidbody2D rb;
@@ -37,18 +37,15 @@ public class BossAI : MonoBehaviour
     {
         if (player == null) return;
 
-        // 1. Movimento: Persegue o player em X e Y (voa com “sede de sangue”)
         Vector3 targetPos = player.position + new Vector3(0, followHeight, 0);
         Vector3 direction = (targetPos - transform.position).normalized;
         transform.position += direction * moveSpeed * Time.deltaTime;
 
-        // 2. Olha para o player (flip horizontal)
         if (player.position.x < transform.position.x)
             transform.localScale = new Vector3(-20, 20, 20);
         else
             transform.localScale = new Vector3(20, 20, 20);
 
-        // 3. Disparo frenético se dentro do campo de visão
         float distanceToPlayer = Vector2.Distance(player.position, transform.position);
         fireCooldown -= Time.deltaTime;
         if (distanceToPlayer <= attackDistance && fireCooldown <= 0f)
@@ -68,7 +65,6 @@ public class BossAI : MonoBehaviour
             GameObject projectile = Instantiate(projectilePrefab, firePos, Quaternion.identity);
             Vector2 dir = (player.position - firePoint.position).normalized;
 
-            // Flip projétil se necessário
             float originalY = projectile.transform.localScale.y;
             float originalZ = projectile.transform.localScale.z;
             float originalX = Mathf.Abs(projectile.transform.localScale.x);

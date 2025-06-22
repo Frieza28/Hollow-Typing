@@ -9,10 +9,8 @@ public abstract class RuneTypingPoint : MonoBehaviour
 
     protected bool completed = false;
 
-    // Subclasses podem precisar de Start para setar estado inicial
     protected virtual void Start() { }
 
-    // Na classe base
     protected virtual void OnTypingStart() { }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -27,13 +25,11 @@ public abstract class RuneTypingPoint : MonoBehaviour
     protected virtual void OnTypingSuccess()
     {
         completed = true;
-        Destroy(gameObject); // Remove a runa do mapa depois de usada
+        Destroy(gameObject); 
     }
 
     protected virtual void OnTypingFail()
     {
-        // Perde vida por defeito
         PlayerStats.Instance.TakeDamage(1);
-        // Podes meter lógica extra nas subclasses
     }
 }

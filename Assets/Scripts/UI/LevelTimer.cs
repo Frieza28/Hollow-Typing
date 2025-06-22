@@ -43,6 +43,11 @@ public class LevelTimer : MonoBehaviour
         timerText.text = $"{minutes:00}:{seconds:00}";
     }
 
+    public void StopTimer()
+    {
+        timerActive = false;
+    }
+
 
     void EndTime()
     {

@@ -6,6 +6,7 @@ public class ChestCollectible : MonoBehaviour
 {
     public GameObject chestIconHUD; 
     public Image chestIconImage;
+    public AudioSource chestAudioSource;
 
     private void Start()
     {
@@ -29,6 +30,7 @@ public class ChestCollectible : MonoBehaviour
                 c.a = 1f;   // 1f = 255 (totalmente opaco)
                 chestIconImage.color = c;
             }
+
             Destroy(gameObject); // Remove o baú do mapa
         }
     }

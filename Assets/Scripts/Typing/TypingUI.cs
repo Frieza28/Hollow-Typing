@@ -17,7 +17,7 @@ public class TypingUI : MonoBehaviour
 
     public void StartTyping(string[] words, float timeLimit, System.Action onSuccess, System.Action onFail)
     {
-        var player = GameObject.FindObjectOfType<PlayerController>();
+        var player = GameObject.FindFirstObjectByType<PlayerController>();
         if (player != null)
         {
             player.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
@@ -45,7 +45,7 @@ public class TypingUI : MonoBehaviour
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);
 
         // Reativa o PlayerController SEMPRE ao fechar o painel
-        var player = GameObject.FindObjectOfType<PlayerController>();
+        var player = GameObject.FindFirstObjectByType<PlayerController>();
         if (player != null)
             player.enabled = true;
     }

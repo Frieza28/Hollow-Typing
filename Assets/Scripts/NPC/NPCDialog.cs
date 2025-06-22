@@ -3,9 +3,9 @@ using TMPro;
 
 public class NPCDialog : MonoBehaviour
 {
-    public GameObject dialogPanel;       // Arrasta aqui o painel do Canvas no Inspector
-    public TextMeshProUGUI dialogText;   // Arrasta aqui o campo de texto do painel
-    [TextArea] public string[] messages; // Podes pôr várias mensagens para esse NPC
+    public GameObject dialogPanel;       
+    public TextMeshProUGUI dialogText;   
+    [TextArea] public string[] messages;
 
     private int currentMsg = 0;
     private bool playerNearby = false;
@@ -34,7 +34,6 @@ public class NPCDialog : MonoBehaviour
             }
             else
             {
-                // Próxima mensagem ou fecha
                 currentMsg++;
                 if (currentMsg < messages.Length)
                 {
@@ -47,7 +46,6 @@ public class NPCDialog : MonoBehaviour
                 }
             }
         }
-        // Se o player sair, fecha o balão
         if (!playerNearby && dialogPanel.activeSelf)
         {
             dialogPanel.SetActive(false);
