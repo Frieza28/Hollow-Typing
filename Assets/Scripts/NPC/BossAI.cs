@@ -95,7 +95,7 @@ public class BossAI : MonoBehaviour
         if (messagePanel != null)
         {
             messagePanel.SetActive(true);
-            messagePanel.GetComponentInChildren<TMP_Text>().text = "Encontra a última ilha!";
+            messagePanel.GetComponentInChildren<TMP_Text>().text = "Find the last island!";
             StartCoroutine(HideMessageAfterSeconds(3f));
         }
         Destroy(gameObject); 

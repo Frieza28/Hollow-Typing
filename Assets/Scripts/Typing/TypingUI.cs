@@ -22,7 +22,7 @@ public class TypingUI : MonoBehaviour
         {
             player.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
             player.GetComponent<Rigidbody2D>().angularVelocity = 0;
-            player.enabled = false; // Desativa o PlayerController!
+            player.enabled = false; 
         }
 
         typingPanel.SetActive(true);
@@ -44,7 +44,6 @@ public class TypingUI : MonoBehaviour
         typingPanel.SetActive(false);
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);
 
-        // Reativa o PlayerController SEMPRE ao fechar o painel
         var player = GameObject.FindFirstObjectByType<PlayerController>();
         if (player != null)
             player.enabled = true;

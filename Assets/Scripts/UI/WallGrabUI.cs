@@ -9,7 +9,6 @@ public class WallGrabUI : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        // Inicialmente esconde o pie
         pieImage.gameObject.SetActive(false);
     }
 
@@ -17,7 +16,7 @@ public class WallGrabUI : MonoBehaviour
     {
         if (pieImage == null) return;
     
-        pieImage.gameObject.SetActive(show); // Só ativa quando show==true
+        pieImage.gameObject.SetActive(show); 
         pieImage.fillAmount = Mathf.Clamp01(fillAmount);
     }
 

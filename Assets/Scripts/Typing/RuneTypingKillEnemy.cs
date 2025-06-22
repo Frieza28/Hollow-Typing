@@ -34,11 +34,11 @@ public class RuneTypingKillEnemy : RuneTypingPoint
             var enemyAI = enemyToKill.GetComponent<EnemyAI>();
             if (enemyAI != null)
             {
-                enemyAI.Die(); // Chama a animação de morte e destroi depois
+                enemyAI.Die();
             }
             else
             {
-                Destroy(enemyToKill); // fallback
+                Destroy(enemyToKill); 
             }
         }
         base.OnTypingSuccess();
