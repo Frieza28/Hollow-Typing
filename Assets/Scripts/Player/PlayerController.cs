@@ -25,10 +25,10 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Distance to check for walls when grabbing")]
     [Range(0.1f, 1f)]
     [SerializeField]
-    private float wallCheckDistance = 0.2f;
-    [Tooltip("Duration of wall grab before cooldown starts")]
-    [Range(1f, 10f)]
-    [SerializeField]
+    //private float wallCheckDistance = 0.2f;
+    //[Tooltip("Duration of wall grab before cooldown starts")]
+    //[Range(1f, 10f)]
+    //[SerializeField]
     private float wallGrabDuration = 5f;
     [Tooltip("Cooldown time after releasing wall grab")]
     [Range(1f, 10f)]
@@ -51,9 +51,8 @@ public class PlayerController : MonoBehaviour
     private int wallSide = 0; // -1 left, 1 right
 
     private bool isOnLadder = false;
-    // TODO: Not using atm
     private float ladderSpeed = 4f;
-    public Transform startPoint; // TODO:?  arrasta aqui o StartPoint no inspector
+    public Transform startPoint; 
 
     // State variables
     private Vector2 moveInput;
@@ -69,22 +68,11 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int dmg)
     {
-        // TODO: subtract health
-        // TODO: move to animate class
         animator.SetTrigger("hurt");
-
-        //if (health <= 0)
-        //{
-        //      Die();
-        //    anim.PlayDie();
-        //    // Disable input, collider, etc.
-        //}
     }
 
     private void Die()
     {
-        // TODO: Implement death logic, like respawning or game over
-        // TODO: move to animate class
         animator.SetTrigger("die");
     }
 
@@ -108,10 +96,8 @@ public class PlayerController : MonoBehaviour
             isInWallGrabCooldown = true;
             wallGrabCooldownTimer = wallGrabCooldown;
 
-            // Impulso para fora da parede
             float jumpDir = wallSide != 0 ? -wallSide : (lastScale.x > 0 ? -1f : 1f);
 
-            // Impulso lateral forte e ligeiro "nudge" para longe da parede
             rb.linearVelocity = new Vector2(jumpDir * speed * 1.2f, jumpForce);
             transform.position += new Vector3(jumpDir * 0.08f, 0, 0);
 
@@ -129,17 +115,14 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // TODO: Refactor animator parameters into a separate class or scriptable object for better organization and reusability.
-        // Flip sprite
         if (moveInput.x > 0.1f)
             lastScale = new Vector3(5, 5, 5);
         else if (moveInput.x < -0.1f)
             lastScale = new Vector3(-5, 5, 5);
         transform.localScale = lastScale;
 
-        // Detecta parede (sempre do lado do WallCheck)
         isTouchingWall = Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, wallLayer);
 
-        // WallSide: guarda o último lado encostado
         if (isTouchingWall)
         {
             wallSide = lastScale.x > 0 ? 1 : -1;
@@ -151,7 +134,6 @@ public class PlayerController : MonoBehaviour
         bool holdingDirection = Mathf.Abs(moveInput.x) > 0.1f;
         bool falling = rb.linearVelocity.y < -0.1f;
 
-        // COOLDOWN TIMER
         if (isInWallGrabCooldown)
         {
             wallGrabCooldownTimer -= Time.deltaTime;
@@ -186,11 +168,9 @@ public class PlayerController : MonoBehaviour
         }
         else if (!isWallGrabbing)
         {
-            // Só desativa o wall grab se não está a segurar a parede (evita bug visual)
             isWallGrabbing = false;
         }
 
-        // UI Pie: SÓ ativa durante wall grab (enquanto agarrado à parede)
         WallGrabUI.Instance?.SetClock(isWallGrabbing ? wallGrabTimer / wallGrabDuration : 0, isWallGrabbing);
 
         // ANIMAÇÕES:
@@ -200,17 +180,15 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isGrounded", groundSensor.IsGrounded);
         animator.SetBool("isWallSliding", isWallGrabbing);
 
-        // TODO: Use Kinematic Rigidbody2D instead?
-        // Movimento vertical na escada
         if (isOnLadder)
         {
             float verticalInput = moveInput.y;
-            rb.gravityScale = 0; // Desativa gravidade enquanto está na escada
+            rb.gravityScale = 0; 
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, verticalInput * ladderSpeed);
         }
         else
         {
-            rb.gravityScale = 1; // Volta à gravidade normal
+            rb.gravityScale = 1; 
         }
 
         // --- CHECK FALL/RESPAWN ---
@@ -222,7 +200,6 @@ public class PlayerController : MonoBehaviour
             // Teleporta para o start point
             transform.position = startPoint.position;
 
-            // Zera velocidade se quiseres
             rb.linearVelocity = Vector2.zero;
             rb.angularVelocity = 0;
         }
