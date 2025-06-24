@@ -5108,6 +5108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chestIconHUD: {fileID: 865078176}
   chestIconImage: {fileID: 865078174}
+  chestAudioSource: {fileID: 0}
 --- !u!61 &440322136
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5870,6 +5871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelCompletePanel: {fileID: 865078175}
+  levelCompletedClip: {fileID: 0}
 --- !u!1 &548101540
 GameObject:
   m_ObjectHideFlags: 0
@@ -8258,7 +8260,7 @@ MonoBehaviour:
   - kill him quick
   - attack
   - oh no
-  - oh nooo
+  - he is coming
   timeLimit: 5
   enemyToKill: {fileID: 796653550}
 --- !u!1001 &1318292167

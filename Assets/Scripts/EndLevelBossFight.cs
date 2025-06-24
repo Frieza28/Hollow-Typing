@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
-public class EndLevel : MonoBehaviour
+public class EndLevelBossFight : MonoBehaviour
 {
     public GameObject levelCompletePanel;
     public AudioClip levelCompletedClip;
     private AudioSource audioSource;
+    public ScreenFader screenFader; 
 
     void Start()
     {
@@ -22,25 +24,24 @@ public class EndLevel : MonoBehaviour
 
             levelCompletePanel.SetActive(true);
 
+            StartCoroutine(CompleteAndFade());
+
             var bgMusic = FindFirstObjectByType<LevelMusicManager>();
             if (bgMusic != null)
                 bgMusic.StopMusic();
-
-            if (audioSource != null && levelCompletedClip != null)
-            {
-                audioSource.PlayOneShot(levelCompletedClip);
-                Invoke("GoToMenu", levelCompletedClip.length);
-            }
-            else
-            {
-                Invoke("GoToMenu", 2f); 
-            }
         }
     }
 
-
-    void GoToMenu()
+    private IEnumerator CompleteAndFade()
     {
-        SceneManager.LoadScene("MainMenu");
+        if (audioSource != null && levelCompletedClip != null)
+            audioSource.PlayOneShot(levelCompletedClip);
+
+        yield return new WaitForSeconds(levelCompletedClip ? levelCompletedClip.length : 2f);
+
+        if (screenFader != null)
+            yield return screenFader.FadeOut();
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreen");
     }
 }

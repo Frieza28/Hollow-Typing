@@ -95,7 +95,7 @@ public class PlayerStats : MonoBehaviour
 
         Time.timeScale = 0f;
         
-        var bgMusic = FindObjectOfType<LevelMusicManager>();
+        var bgMusic = FindFirstObjectByType<LevelMusicManager>();
         if (bgMusic != null)
             bgMusic.StopMusic();
 
