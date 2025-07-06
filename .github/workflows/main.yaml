@@ -1,0 +1,103 @@
+name: Unity CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  UNITY_VERSION: 6000.0.46f1
+  PROJECT_PATH: ./
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        targetPlatform: [StandaloneWindows64, StandaloneLinux64, StandaloneOSX, WebGL]
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Cache Library
+      uses: actions/cache@v3
+      with:
+        path: ${{ env.PROJECT_PATH }}/Library
+        key: Library-${{ hashFiles('**/ProjectSettings/ProjectVersion.txt') }}
+        restore-keys: |
+          Library-
+
+    - name: Decode Unity license
+      run: |
+        echo "${{ secrets.UNITY_LICENSE_FILE }}" | base64 -d > unity.ulf
+
+    - name: Activate Unity (Manual)
+      uses: game-ci/unity-activate@v2
+      with:
+        unityVersion: ${{ env.UNITY_VERSION }}
+        manualLicenseFile: unity.ulf
+
+    - name: Build for ${{ matrix.targetPlatform }}
+      uses: game-ci/unity-builder@v4
+      with:
+        unityVersion:      ${{ env.UNITY_VERSION }}
+        projectPath:       ${{ env.PROJECT_PATH }}
+        targetPlatform:    ${{ matrix.targetPlatform }}
+        # buildMethod:     ProjectTools.CICustomBuild # if we need to build custom scene or use custom build script
+
+    # TODO: uncomment and configure when ready to deploy
+    # - name: Upload ${{ matrix.targetPlatform }} build
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: HollowTyping_${{ matrix.targetPlatform }}
+    #     path: build/${{ matrix.targetPlatform }}
+
+    # ───────────────────────────────────────────────────────────────
+    # QUALITY STEPS
+    # ───────────────────────────────────────────────────────────────
+
+    - name: dotnet-format check
+      run: |
+        dotnet tool update -g dotnet-format
+        dotnet-format --verify-no-changes --folder ${{ env.PROJECT_PATH }}/Assets
+
+    - name: Roslyn analyzers
+      run: |
+        dotnet build ${{ env.PROJECT_PATH }}/YourSolution.sln -p:TreatWarningsAsErrors=true
+
+    - name: Super Linter
+      uses: github/super-linter@v6
+      env:
+        DEFAULT_BRANCH: main
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        VALIDATE_CSHARP: true
+        VALIDATE_YAML:   true
+        VALIDATE_MARKDOWN: true
+
+    # TODO: uncomment and configure when ready to run tests
+    # - name: Unity Test Runner
+    #   uses: game-ci/unity-test-runner@v4
+    #   with:
+    #     unityVersion:   ${{ env.UNITY_VERSION }}
+    #     projectPath:    ${{ env.PROJECT_PATH }}
+    #     testMode:       All          # EditMode | PlayMode | All
+    #   env:
+    #     UNITY_LICENSE_FILE: unity.ulf
+
+    # TODO: uncomment and configure when ready to deploy on itch.io e.g.
+    # - name: Deploy WebGL to itch.io
+    #   if: github.ref == 'refs/heads/main' && success()            # only on main
+    #   env:
+    #     BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+    #   run: |
+    #     butler push build/WebGL youritch/holow-typing:web
+
+    # TODO: Deploy to Unity Play
+    # TODO: Need to set versioning on each build
+
+    - name: Cleanup
+      run: |
+        rm unity.ulf
+        echo "Cleanup complete"
